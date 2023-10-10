@@ -13,13 +13,20 @@ struct ContentView: View {
     @State private var tipAmount = 20
     
     
+    var total: (Double, Double) {
+        // calculate total with tip and total per person
+        let grandTotal = checkAmount + (checkAmount * Double((tipAmount / 100)))
+        let totalPerPerson = grandTotal / Double(noOfPeople)
+        
+        return(grandTotal, totalPerPerson)
+    }
     
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Bill Amount", value: $checkAmount, format: .currency(code: "PLN"))
+                    TextField("Check Amount", value: $checkAmount, format: .currency(code: "PLN"))
                     Picker("Number of people", selection: $noOfPeople){
                         ForEach(0..<100){
                             Text("\($0) people")
@@ -31,7 +38,7 @@ struct ContentView: View {
                 Section {
                     Picker("Tip precentage", selection: $tipAmount){
                         ForEach(0..<51){
-                            Text("\($0)%")
+                            Text($0 ,format: .percent)
                         }
                     }
                 } header: {
@@ -40,14 +47,14 @@ struct ContentView: View {
                 .pickerStyle(.navigationLink)
                 
                 Section {
-                    Text("Per person")
+                    Text(total.1, format: .currency(code: "PLN"))
                 } header: {
                     Text("AMOUNT PER PERSON")
                 }
             
                 
                 Section {
-                    Text("total")
+                    Text(total.0, format: .currency(code: "PLN"))
                 } header: {
                     Text("TOTAL WITH TIP")
                 }
