@@ -30,23 +30,27 @@ class Bill: ObservableObject {
     }
     
     func grandTotalCalculation(isTipInPercent:Bool) -> Double {
-        let total = (isTipInPercent ?
-                     checkAmount + (checkAmount * Double(( tipAmountinPercent  / 100))) :
-                         (checkAmount + Double(tipAmountinCash))
-                    )
         
-        return total
+        if isTipInPercent {
+            let tipValue = checkAmount * (Double(tipAmountinPercent) / 100)
+            return checkAmount + tipValue
+        }
+                   
+        return checkAmount + Double(tipAmountinCash)
+                    
+        
+       
     }
     
     
-    func tipAmount() -> Int {
+    func tipAmount(isTipInPercent: Bool) -> Int {
         if isTipInPercent {
             return tipAmountinPercent
         }
         return tipAmountinCash
     }
     
-    func toggleHeader() -> String {
+    func toggleHeader(isTipInPercent: Bool) -> String {
         isTipInPercent ? "percentage" : "cash"
     }
 }

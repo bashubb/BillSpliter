@@ -35,7 +35,7 @@ struct ContentView: View {
                 Section {
                     HStack {
                         Text("Tip")
-                        Toggle(bill.toggleHeader(), isOn: $bill.isTipInPercent)
+                        Toggle(bill.toggleHeader(isTipInPercent: bill.isTipInPercent), isOn: $bill.isTipInPercent)
                     }
                     
                     TipChooseView(bill: bill, isTipAmountFocused: _isCheckAmountFocused)
@@ -49,7 +49,7 @@ struct ContentView: View {
                 // Amount per person
                 Section {
                     Text(bill.total.1, format: .currency(code: bill.localCurrency))
-                        .noTipColor(tipAmount: bill.tipAmount(), check: bill.checkAmount)
+                        .noTipColor(tipAmount: bill.tipAmount(isTipInPercent: bill.isTipInPercent), check: bill.checkAmount)
                 } header: {
                     Text("AMOUNT PER PERSON")
                 }
@@ -58,7 +58,7 @@ struct ContentView: View {
                 // Total amount
                 Section {
                     Text(bill.total.0, format: .currency(code: bill.localCurrency))
-                        .noTipColor(tipAmount: bill.tipAmount(), check: bill.checkAmount)
+                        .noTipColor(tipAmount: bill.tipAmount(isTipInPercent: bill.isTipInPercent), check: bill.checkAmount)
                 } header: {
                     Text("TOTAL WITH TIP")
                 }
@@ -129,13 +129,9 @@ struct TipChooseView: View {
 struct NoTip: ViewModifier {
     var tipAmount:Int
     var check: Double
+    
     func body(content: Content) -> some View {
-        
-        if check != 0.0 {
-            content
-                .foregroundStyle(tipAmount == 0 ? Color.red : Color.primary)
-        }
+        content
+            .foregroundStyle((tipAmount == 0 && check != 0.0) ? Color.red : Color.primary)
     }
-    
-    
 }

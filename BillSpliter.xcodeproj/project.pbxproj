@@ -12,7 +12,18 @@
 		B5B126B92ACC1B3500DB61AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126B82ACC1B3500DB61AE /* Assets.xcassets */; };
 		B5B126BC2ACC1B3500DB61AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126BB2ACC1B3500DB61AE /* Preview Assets.xcassets */; };
 		B5F48D002AD82361009DDB00 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48CFF2AD82361009DDB00 /* Bill.swift */; };
+		B5F48D082AD84620009DDB00 /* BillSpliterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B5F48D092AD84620009DDB00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5B126A92ACC1B3300DB61AE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5B126B02ACC1B3300DB61AE;
+			remoteInfo = BillSpliter;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B5B126B12ACC1B3300DB61AE /* BillSpliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSpliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -21,10 +32,19 @@
 		B5B126B82ACC1B3500DB61AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5B126BB2ACC1B3500DB61AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B5F48CFF2AD82361009DDB00 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
+		B5F48D052AD84620009DDB00 /* BillSpliterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillSpliterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSpliterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B5B126AE2ACC1B3300DB61AE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5F48D022AD84620009DDB00 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -38,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				B5B126B32ACC1B3300DB61AE /* BillSpliter */,
+				B5F48D062AD84620009DDB00 /* BillSpliterTests */,
 				B5B126B22ACC1B3300DB61AE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				B5B126B12ACC1B3300DB61AE /* BillSpliter.app */,
+				B5F48D052AD84620009DDB00 /* BillSpliterTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +92,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		B5F48D062AD84620009DDB00 /* BillSpliterTests */ = {
+			isa = PBXGroup;
+			children = (
+				B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */,
+			);
+			path = BillSpliterTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,6 +120,24 @@
 			productReference = B5B126B12ACC1B3300DB61AE /* BillSpliter.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B5F48D042AD84620009DDB00 /* BillSpliterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5F48D0B2AD84620009DDB00 /* Build configuration list for PBXNativeTarget "BillSpliterTests" */;
+			buildPhases = (
+				B5F48D012AD84620009DDB00 /* Sources */,
+				B5F48D022AD84620009DDB00 /* Frameworks */,
+				B5F48D032AD84620009DDB00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5F48D0A2AD84620009DDB00 /* PBXTargetDependency */,
+			);
+			name = BillSpliterTests;
+			productName = BillSpliterTests;
+			productReference = B5F48D052AD84620009DDB00 /* BillSpliterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -102,6 +150,10 @@
 				TargetAttributes = {
 					B5B126B02ACC1B3300DB61AE = {
 						CreatedOnToolsVersion = 15.0;
+					};
+					B5F48D042AD84620009DDB00 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = B5B126B02ACC1B3300DB61AE;
 					};
 				};
 			};
@@ -119,6 +171,7 @@
 			projectRoot = "";
 			targets = (
 				B5B126B02ACC1B3300DB61AE /* BillSpliter */,
+				B5F48D042AD84620009DDB00 /* BillSpliterTests */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +183,13 @@
 			files = (
 				B5B126BC2ACC1B3500DB61AE /* Preview Assets.xcassets in Resources */,
 				B5B126B92ACC1B3500DB61AE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5F48D032AD84620009DDB00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,7 +206,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B5F48D012AD84620009DDB00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5F48D082AD84620009DDB00 /* BillSpliterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B5F48D0A2AD84620009DDB00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5B126B02ACC1B3300DB61AE /* BillSpliter */;
+			targetProxy = B5F48D092AD84620009DDB00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B5B126BD2ACC1B3500DB61AE /* Debug */ = {
@@ -328,6 +404,42 @@
 			};
 			name = Release;
 		};
+		B5F48D0C2AD84620009DDB00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F43F5V3HNZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BillSpliter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BillSpliter";
+			};
+			name = Debug;
+		};
+		B5F48D0D2AD84620009DDB00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F43F5V3HNZ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BillSpliter.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BillSpliter";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -345,6 +457,15 @@
 			buildConfigurations = (
 				B5B126C02ACC1B3500DB61AE /* Debug */,
 				B5B126C12ACC1B3500DB61AE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5F48D0B2AD84620009DDB00 /* Build configuration list for PBXNativeTarget "BillSpliterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5F48D0C2AD84620009DDB00 /* Debug */,
+				B5F48D0D2AD84620009DDB00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
