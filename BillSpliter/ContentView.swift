@@ -10,15 +10,19 @@ import SwiftUI
 struct ContentView: View {
     @State private var checkAmount = 0.0
     @State private var noOfPeople = 2
-    @State private var tipAmount = 20
-    @FocusState private var amountIsFocused: Bool
+    @State private var tipAmountinPercent = 20
+    @State private var tipAmountinCash = 0
+    @State private var isTipInPercent = true
+    @FocusState private var isFocused: Bool
     
     
     var localCurrency = Locale.current.currency?.identifier ?? "PLN"
     
     var total: (Double, Double) {
         // calculate total with tip and total per person
-        let grandTotal = checkAmount + (checkAmount * Double((tipAmount / 100)))
+
+        let grandTotal = grandTotalCalculation()
+        
         let totalPerPerson = grandTotal / Double(noOfPeople)
         
         return(grandTotal, totalPerPerson)
@@ -28,10 +32,12 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Form {
+                
+                // Amount
                 Section {
                     TextField("Check Amount", value: $checkAmount, format: .currency(code: localCurrency))
                         .keyboardType(.decimalPad)
-                        .focused($amountIsFocused)
+                        .focused($isFocused)
                     
                     Picker("Number of people", selection: $noOfPeople){
                         ForEach(0..<100){
@@ -41,44 +47,85 @@ struct ContentView: View {
                     .pickerStyle(.navigationLink)
                 }
                 
+                
+                // Tip
                 Section {
-                    Picker("Tip precentage", selection: $tipAmount){
-                        ForEach(0..<51){
-                            Text($0 ,format: .percent)
+                    HStack {
+                        Text("Tip")
+                        Toggle(isTipInPercent ? "percentage" : "cash value", isOn: $isTipInPercent)
+                    }
+                    if isTipInPercent {
+                        Picker("Tip percentage", selection: $tipAmountinPercent){
+                            ForEach(0..<51){
+                                if ($0 % 10) == 0 {
+                                    Text($0 ,format: .percent)
+                                }
+                            }
                         }
-                    }.pickerStyle(.navigationLink)
+                        .labelsHidden()
+                    } else {
+                        HStack {
+                            Text("Enter your tip")
+                                
+                            TextField("Your tip", value: $tipAmountinCash, format: .currency(code: localCurrency) )
+                                .textFieldStyle(.roundedBorder)
+                                .keyboardType(.decimalPad)
+                                .focused($isFocused)
+                        }
+                    }
+                   
                 } header: {
                     Text("HOW MUCH TIP DO YOU WANT TO LEAVE ?")
                 }
             
                 
-                
+                // Amount per person
                 Section {
                     Text(total.1, format: .currency(code: "PLN"))
-                        .noTipColor(tipAmount: tipAmount)
+                        .noTipColor(tipAmount: isTipInPercent ? tipAmountinPercent : tipAmountinCash)
                 } header: {
                     Text("AMOUNT PER PERSON")
                 }
             
                 
+                // Total amount
                 Section {
                     Text(total.0, format: .currency(code: "PLN"))
-                        .noTipColor(tipAmount: tipAmount)
+                        .noTipColor(tipAmount: isTipInPercent ? tipAmountinPercent : tipAmountinCash)
                 } header: {
                     Text("TOTAL WITH TIP")
                 }
                 
             }
             .navigationTitle("Bill Spliter")
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done"){
+                        isFocused = false
+                    }
+                }
+            }
         }
+        .animation(.default, value: isTipInPercent)
     }
+    
+    
+    
+    func grandTotalCalculation() -> Double {
+        let total = (isTipInPercent ?
+                     checkAmount + (checkAmount * Double(( tipAmountinPercent  / 100))) :
+                     checkAmount + Double(tipAmountinCash))
+        return total
+    }
+  
+    
+    
 }
 
 #Preview {
     ContentView()
 }
-
-
 
 
 
