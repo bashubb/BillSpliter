@@ -8,25 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var checkAmount = 0.0
-    @State private var noOfPeople = 2
-    @State private var tipAmountinPercent = 20
-    @State private var tipAmountinCash = 0
-    @State private var isTipInPercent = true
-    @FocusState private var isFocused: Bool
-    
-    
-    var localCurrency = Locale.current.currency?.identifier ?? "PLN"
-    
-    var total: (Double, Double) {
-        // calculate total with tip and total per person
-
-        let grandTotal = grandTotalCalculation()
-        
-        let totalPerPerson = grandTotal / Double(noOfPeople)
-        
-        return(grandTotal, totalPerPerson)
-    }
+    @StateObject var bill = Bill()
+    @FocusState private var isCheckAmountFocused: Bool
     
     
     var body: some View {
@@ -35,11 +18,11 @@ struct ContentView: View {
                 
                 // Amount
                 Section {
-                    TextField("Check Amount", value: $checkAmount, format: .currency(code: localCurrency))
+                    TextField("Check Amount", value: $bill.checkAmount, format: .currency(code: bill.localCurrency))
                         .keyboardType(.decimalPad)
-                        .focused($isFocused)
+                        .focused($isCheckAmountFocused)
                     
-                    Picker("Number of people", selection: $noOfPeople){
+                    Picker("Number of people", selection: $bill.noOfPeople){
                         ForEach(0..<100){
                             Text("\($0) people")
                         }
@@ -52,46 +35,30 @@ struct ContentView: View {
                 Section {
                     HStack {
                         Text("Tip")
-                        Toggle(isTipInPercent ? "percentage" : "cash value", isOn: $isTipInPercent)
+                        Toggle(bill.toggleHeader(), isOn: $bill.isTipInPercent)
                     }
-                    if isTipInPercent {
-                        Picker("Tip percentage", selection: $tipAmountinPercent){
-                            ForEach(0..<51){
-                                if ($0 % 10) == 0 {
-                                    Text($0 ,format: .percent)
-                                }
-                            }
-                        }
-                        .labelsHidden()
-                    } else {
-                        HStack {
-                            Text("Enter your tip")
-                                
-                            TextField("Your tip", value: $tipAmountinCash, format: .currency(code: localCurrency) )
-                                .textFieldStyle(.roundedBorder)
-                                .keyboardType(.decimalPad)
-                                .focused($isFocused)
-                        }
-                    }
-                   
+                    
+                    TipChooseView(bill: bill, isTipAmountFocused: _isCheckAmountFocused)
+                    
+                    
                 } header: {
                     Text("HOW MUCH TIP DO YOU WANT TO LEAVE ?")
                 }
-            
+                
                 
                 // Amount per person
                 Section {
-                    Text(total.1, format: .currency(code: "PLN"))
-                        .noTipColor(tipAmount: isTipInPercent ? tipAmountinPercent : tipAmountinCash)
+                    Text(bill.total.1, format: .currency(code: bill.localCurrency))
+                        .noTipColor(tipAmount: bill.tipAmount(), check: bill.checkAmount)
                 } header: {
                     Text("AMOUNT PER PERSON")
                 }
-            
+                
                 
                 // Total amount
                 Section {
-                    Text(total.0, format: .currency(code: "PLN"))
-                        .noTipColor(tipAmount: isTipInPercent ? tipAmountinPercent : tipAmountinCash)
+                    Text(bill.total.0, format: .currency(code: bill.localCurrency))
+                        .noTipColor(tipAmount: bill.tipAmount(), check: bill.checkAmount)
                 } header: {
                     Text("TOTAL WITH TIP")
                 }
@@ -102,25 +69,12 @@ struct ContentView: View {
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
                     Button("Done"){
-                        isFocused = false
+                        isCheckAmountFocused = false
                     }
                 }
             }
         }
-        .animation(.default, value: isTipInPercent)
     }
-    
-    
-    
-    func grandTotalCalculation() -> Double {
-        let total = (isTipInPercent ?
-                     checkAmount + (checkAmount * Double(( tipAmountinPercent  / 100))) :
-                     checkAmount + Double(tipAmountinCash))
-        return total
-    }
-  
-    
-    
 }
 
 #Preview {
@@ -129,9 +83,42 @@ struct ContentView: View {
 
 
 
+
 extension View {
-    func noTipColor(tipAmount: Int) -> some View {
-        modifier(NoTip(tipAmount: tipAmount))
+    func noTipColor(tipAmount: Int, check: Double) -> some View {
+        modifier(NoTip(tipAmount: tipAmount, check: check))
+    }
+}
+
+
+
+struct TipChooseView: View {
+    @ObservedObject var bill: Bill
+    @FocusState var isTipAmountFocused: Bool
+    
+    var body: some View {
+        VStack {
+            if bill.isTipInPercent {
+                Picker("Tip percentage", selection: $bill.tipAmountinPercent){
+                    ForEach(0..<51){
+                        if ($0 % 10) == 0 {
+                            Text($0 ,format: .percent)
+                        }
+                    }
+                }
+                .labelsHidden()
+            } else {
+                HStack {
+                    Text("Enter your tip")
+                    
+                    TextField("Your tip", value: $bill.tipAmountinCash, format: .currency(code: bill.localCurrency) )
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.decimalPad)
+                        .focused($isTipAmountFocused)
+                }
+            }
+        }
+        
     }
 }
 
@@ -141,10 +128,13 @@ extension View {
 // custom Modifier
 struct NoTip: ViewModifier {
     var tipAmount:Int
-    
+    var check: Double
     func body(content: Content) -> some View {
-        content
-            .foregroundStyle(tipAmount == 0 ? Color.red : Color.primary)
+        
+        if check != 0.0 {
+            content
+                .foregroundStyle(tipAmount == 0 ? Color.red : Color.primary)
+        }
     }
     
     
