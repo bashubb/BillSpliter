@@ -11,7 +11,10 @@ struct ContentView: View {
     @State private var checkAmount = 0.0
     @State private var noOfPeople = 2
     @State private var tipAmount = 20
+    @FocusState private var amountIsFocused: Bool
     
+    
+    var localCurrency = Locale.current.currency?.identifier ?? "PLN"
     
     var total: (Double, Double) {
         // calculate total with tip and total per person
@@ -26,7 +29,10 @@ struct ContentView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Check Amount", value: $checkAmount, format: .currency(code: "PLN"))
+                    TextField("Check Amount", value: $checkAmount, format: .currency(code: localCurrency))
+                        .keyboardType(.decimalPad)
+                        .focused($amountIsFocused)
+                    
                     Picker("Number of people", selection: $noOfPeople){
                         ForEach(0..<100){
                             Text("\($0) people")
@@ -40,14 +46,16 @@ struct ContentView: View {
                         ForEach(0..<51){
                             Text($0 ,format: .percent)
                         }
-                    }
+                    }.pickerStyle(.navigationLink)
                 } header: {
                     Text("HOW MUCH TIP DO YOU WANT TO LEAVE ?")
                 }
-                .pickerStyle(.navigationLink)
+            
+                
                 
                 Section {
                     Text(total.1, format: .currency(code: "PLN"))
+                        .noTipColor(tipAmount: tipAmount)
                 } header: {
                     Text("AMOUNT PER PERSON")
                 }
@@ -55,6 +63,7 @@ struct ContentView: View {
                 
                 Section {
                     Text(total.0, format: .currency(code: "PLN"))
+                        .noTipColor(tipAmount: tipAmount)
                 } header: {
                     Text("TOTAL WITH TIP")
                 }
@@ -69,3 +78,27 @@ struct ContentView: View {
     ContentView()
 }
 
+
+
+
+
+extension View {
+    func noTipColor(tipAmount: Int) -> some View {
+        modifier(NoTip(tipAmount: tipAmount))
+    }
+}
+
+
+
+
+// custom Modifier
+struct NoTip: ViewModifier {
+    var tipAmount:Int
+    
+    func body(content: Content) -> some View {
+        content
+            .foregroundStyle(tipAmount == 0 ? Color.red : Color.primary)
+    }
+    
+    
+}
