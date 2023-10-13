@@ -13,6 +13,7 @@
 		B5B126BC2ACC1B3500DB61AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126BB2ACC1B3500DB61AE /* Preview Assets.xcassets */; };
 		B5F48D002AD82361009DDB00 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48CFF2AD82361009DDB00 /* Bill.swift */; };
 		B5F48D082AD84620009DDB00 /* BillSpliterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */; };
+		B5F48D0F2AD92ADD009DDB00 /* PublishedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48D0E2AD92ADD009DDB00 /* PublishedTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		B5F48CFF2AD82361009DDB00 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		B5F48D052AD84620009DDB00 /* BillSpliterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillSpliterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSpliterTests.swift; sourceTree = "<group>"; };
+		B5F48D0E2AD92ADD009DDB00 /* PublishedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishedTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */,
+				B5F48D0E2AD92ADD009DDB00 /* PublishedTests.swift */,
 			);
 			path = BillSpliterTests;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5F48D0F2AD92ADD009DDB00 /* PublishedTests.swift in Sources */,
 				B5F48D082AD84620009DDB00 /* BillSpliterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,6 +416,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -430,6 +435,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
