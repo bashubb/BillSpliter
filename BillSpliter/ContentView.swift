@@ -119,6 +119,7 @@ struct TipChooseView: View {
             }
         }
         
+        
     }
 }
 

@@ -27,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B51871AD2AE5C25E0077B107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B5B126B12ACC1B3300DB61AE /* BillSpliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSpliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B126B42ACC1B3300DB61AE /* BillSpliterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSpliterApp.swift; sourceTree = "<group>"; };
 		B5B126B62ACC1B3300DB61AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		B5F48D062AD84620009DDB00 /* BillSpliterTests */ = {
 			isa = PBXGroup;
 			children = (
+				B51871AD2AE5C25E0077B107 /* Info.plist */,
 				B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */,
 				B5F48D0E2AD92ADD009DDB00 /* PublishedTests.swift */,
 			);
@@ -416,6 +418,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BillSpliterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
@@ -435,6 +438,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BillSpliterTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
