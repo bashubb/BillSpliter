@@ -9,6 +9,8 @@ The app has default iOS look. It's build from components out of the box, without
 I've found alot of fun in creating something useful with minimalistic design.
 An app has high test coverage, and I'am really proud of it. I would like to keep it that way during the app growth.
 
+<img src="https://github.com/bashubb/BillSpliter/blob/main/Bill%20Spliter%20Test%20Coverage.png" width="40%" />
+
 <h2>Technology</h2>
 <ul>
   <li>SwiftUI</li>
