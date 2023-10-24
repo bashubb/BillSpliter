@@ -7,34 +7,34 @@
 
 import Foundation
 
-class PersonModel: ObservableObject {
-    @Published var friends = [Person]()
-    @Published var choosenPerson: Person?
-    init() {
-        
-    }
-    
-    
-    func alterPerson(_ person: Person) {
-            self.friends = self.friends.map { $0.id == person.id ? person : $0 }
-        }
-    
-    func addPerson(_ person: Person) {
-        self.friends.append(person)
-    }
-    
-    func addExpense(_ amount: Int) {
-        for friend in friends {
-            if friend.id == choosenPerson?.id {
-                print("founded matching person")
-                
-                var newFriend = friend
-                newFriend.spendedCash += amount
-                alterPerson(newFriend)
-            }
-        }
-    }
-    
+//class PersonModel: ObservableObject {
+//    @Published var friends = [Person]()
+//    @Published var choosenPerson: Person?
+//    init() {
+//        
+//    }
+//    
+//    
+//    func alterPerson(_ person: Person) {
+//            self.friends = self.friends.map { $0.id == person.id ? person : $0 }
+//        }
+//    
+//    func addPerson(_ person: Person) {
+//        self.friends.append(person)
+//    }
+//    
+//    func addExpense(_ amount: Int) {
+//        for friend in friends {
+//            if friend.id == choosenPerson?.id {
+//                print("founded matching person")
+//                
+//                var newFriend = friend
+//                newFriend.spendedCash += amount
+//                alterPerson(newFriend)
+//            }
+//        }
+//    }
+//    
 //
 //var monika = Friend(name: "Monika", spendedCash: 150)
 //var hubert = Friend(name: "Hubert", spendedCash: 20)
@@ -98,4 +98,4 @@ class PersonModel: ObservableObject {
 //    
 //}
 //
-}
+

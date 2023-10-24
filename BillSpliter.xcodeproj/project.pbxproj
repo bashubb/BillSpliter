@@ -7,9 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B51871D32AE6FAAA0077B107 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871D22AE6FAAA0077B107 /* Person.swift */; };
 		B51871D62AE6FB710077B107 /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871D52AE6FB710077B107 /* PersonModel.swift */; };
 		B51871D92AE6FC3B0077B107 /* DetailSplitterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871D82AE6FC3B0077B107 /* DetailSplitterView.swift */; };
+		B51871DC2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B51871DA2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodeld */; };
+		B51871EF2AE844630077B107 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871EE2AE844630077B107 /* DataController.swift */; };
+		B51871F12AE848480077B107 /* AddPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F02AE848480077B107 /* AddPersonView.swift */; };
+		B51871F82AE859390077B107 /* PersonEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F22AE859390077B107 /* PersonEntity+CoreDataClass.swift */; };
+		B51871F92AE859390077B107 /* PersonEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F32AE859390077B107 /* PersonEntity+CoreDataProperties.swift */; };
+		B51871FA2AE859390077B107 /* EventEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F42AE859390077B107 /* EventEntity+CoreDataClass.swift */; };
+		B51871FB2AE859390077B107 /* EventEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F52AE859390077B107 /* EventEntity+CoreDataProperties.swift */; };
+		B51871FC2AE859390077B107 /* ExpenseEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F62AE859390077B107 /* ExpenseEntity+CoreDataClass.swift */; };
+		B51871FD2AE859390077B107 /* ExpenseEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871F72AE859390077B107 /* ExpenseEntity+CoreDataProperties.swift */; };
+		B51871FF2AE85D4D0077B107 /* AddEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51871FE2AE85D4D0077B107 /* AddEventView.swift */; };
 		B5B126B52ACC1B3300DB61AE /* BillSpliterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B126B42ACC1B3300DB61AE /* BillSpliterApp.swift */; };
 		B5B126B72ACC1B3300DB61AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B126B62ACC1B3300DB61AE /* ContentView.swift */; };
 		B5B126B92ACC1B3500DB61AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126B82ACC1B3500DB61AE /* Assets.xcassets */; };
@@ -31,9 +40,18 @@
 
 /* Begin PBXFileReference section */
 		B51871AD2AE5C25E0077B107 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		B51871D22AE6FAAA0077B107 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B51871D52AE6FB710077B107 /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		B51871D82AE6FC3B0077B107 /* DetailSplitterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSplitterView.swift; sourceTree = "<group>"; };
+		B51871DB2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DetailBillSpliterModel.xcdatamodel; sourceTree = "<group>"; };
+		B51871EE2AE844630077B107 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		B51871F02AE848480077B107 /* AddPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonView.swift; sourceTree = "<group>"; };
+		B51871F22AE859390077B107 /* PersonEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B51871F32AE859390077B107 /* PersonEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersonEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B51871F42AE859390077B107 /* EventEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B51871F52AE859390077B107 /* EventEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B51871F62AE859390077B107 /* ExpenseEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpenseEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B51871F72AE859390077B107 /* ExpenseEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpenseEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B51871FE2AE85D4D0077B107 /* AddEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventView.swift; sourceTree = "<group>"; };
 		B5B126B12ACC1B3300DB61AE /* BillSpliter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillSpliter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B126B42ACC1B3300DB61AE /* BillSpliterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSpliterApp.swift; sourceTree = "<group>"; };
 		B5B126B62ACC1B3300DB61AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,8 +84,13 @@
 		B51871D12AE6FA850077B107 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B51871F22AE859390077B107 /* PersonEntity+CoreDataClass.swift */,
+				B51871F32AE859390077B107 /* PersonEntity+CoreDataProperties.swift */,
+				B51871F42AE859390077B107 /* EventEntity+CoreDataClass.swift */,
+				B51871F52AE859390077B107 /* EventEntity+CoreDataProperties.swift */,
+				B51871F62AE859390077B107 /* ExpenseEntity+CoreDataClass.swift */,
+				B51871F72AE859390077B107 /* ExpenseEntity+CoreDataProperties.swift */,
 				B5F48CFF2AD82361009DDB00 /* Bill.swift */,
-				B51871D22AE6FAAA0077B107 /* Person.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -85,8 +108,18 @@
 			children = (
 				B5B126B62ACC1B3300DB61AE /* ContentView.swift */,
 				B51871D82AE6FC3B0077B107 /* DetailSplitterView.swift */,
+				B51871F02AE848480077B107 /* AddPersonView.swift */,
+				B51871FE2AE85D4D0077B107 /* AddEventView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B51871ED2AE844470077B107 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				B51871EE2AE844630077B107 /* DataController.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		B5B126A82ACC1B3300DB61AE = {
@@ -114,7 +147,9 @@
 				B51871D12AE6FA850077B107 /* Models */,
 				B51871D42AE6FB3D0077B107 /* ViewModels */,
 				B51871D72AE6FBE50077B107 /* Views */,
+				B51871ED2AE844470077B107 /* Service */,
 				B5B126B82ACC1B3500DB61AE /* Assets.xcassets */,
+				B51871DA2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodeld */,
 				B5B126BA2ACC1B3500DB61AE /* Preview Content */,
 			);
 			path = BillSpliter;
@@ -238,12 +273,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B51871D32AE6FAAA0077B107 /* Person.swift in Sources */,
+				B51871F82AE859390077B107 /* PersonEntity+CoreDataClass.swift in Sources */,
 				B5B126B72ACC1B3300DB61AE /* ContentView.swift in Sources */,
+				B51871FA2AE859390077B107 /* EventEntity+CoreDataClass.swift in Sources */,
+				B51871FB2AE859390077B107 /* EventEntity+CoreDataProperties.swift in Sources */,
+				B51871DC2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodeld in Sources */,
+				B51871FC2AE859390077B107 /* ExpenseEntity+CoreDataClass.swift in Sources */,
 				B5F48D002AD82361009DDB00 /* Bill.swift in Sources */,
 				B51871D62AE6FB710077B107 /* PersonModel.swift in Sources */,
+				B51871FD2AE859390077B107 /* ExpenseEntity+CoreDataProperties.swift in Sources */,
 				B51871D92AE6FC3B0077B107 /* DetailSplitterView.swift in Sources */,
+				B51871FF2AE85D4D0077B107 /* AddEventView.swift in Sources */,
+				B51871EF2AE844630077B107 /* DataController.swift in Sources */,
 				B5B126B52ACC1B3300DB61AE /* BillSpliterApp.swift in Sources */,
+				B51871F12AE848480077B107 /* AddPersonView.swift in Sources */,
+				B51871F92AE859390077B107 /* PersonEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +499,7 @@
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BillSpliterTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.7;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -475,7 +519,7 @@
 				DEVELOPMENT_TEAM = F43F5V3HNZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BillSpliterTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.7;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bashubb.BillSpliterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -517,6 +561,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B51871DA2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B51871DB2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodel */,
+			);
+			currentVersion = B51871DB2AE83A690077B107 /* DetailBillSpliterModel.xcdatamodel */;
+			path = DetailBillSpliterModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B5B126A92ACC1B3300DB61AE /* Project object */;
 }

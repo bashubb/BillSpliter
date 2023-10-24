@@ -8,66 +8,63 @@
 import SwiftUI
 
 struct DetailSplitterView: View {
-    @StateObject var vm = PersonModel()
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var friends: FetchedResults<PersonEntity>
+    @FetchRequest(sortDescriptors: []) var events: FetchedResults<EventEntity>
     
-    @State private var name = ""
-    @State private var expenseAmount = 0
-    
-    
-    @FocusState private var isFocused: Bool
+    @State private var showingAddScreenFriend = false
+    @State private var showingAddScreenEvent = false
     
     var body: some View {
         NavigationStack {
+            Form {
+                Section("Friends to share expenses") {
+                    if friends.isEmpty {
+                        Text("You have no firends on your list! Add some!")
+                            .font(.footnote)
+                            .foregroundStyle(Color.red.opacity(0.8))
+                    } else {
+                        List {
+                            ForEach(friends) {friend in
+                                Text(friend.name ?? "Unknown name")
+                            }
+                        }
+                    }
+                    
+                    Button("Add a new friend"){
+                        showingAddScreenFriend = true
+                    }
+                }
+                
+                Section("Events") {
+                    if events.isEmpty {
+                        Text("You have no events on your list! Add some!")
+                            .font(.footnote)
+                            .foregroundStyle(Color.red.opacity(0.8))
+                    } else {
+                        List {
+                            ForEach(events) {event in
+                                Text(event.name ?? "Unknown name")
+                            }
+                        }
+                    }
+                    
+                    Button("Add a new event"){
+                        showingAddScreenEvent = true
+                    }
+                }
+            }
+            .navigationTitle("Detail Splitter")
             
-            Form  {
-                Section("Add Person"){
-                    TextField("name", text: $name)
-                        .focused($isFocused)
-                    Button("Save") {
-                        let person = Person(name: name, spendedCash: 0)
-                        vm.addPerson(person)
-                        name = ""
-                    }
-                    
-                }
-                Section("Add Expense") {
-                    TextField("expense amount", value: $expenseAmount, format: .currency(code: Bill.localCurrency))
-                        .keyboardType(.decimalPad)
-                        .focused($isFocused)
-                    
-                    Picker("Choose a Person", selection: $vm.choosenPerson) {
-                        ForEach(vm.friends) { friend in
-                            Text(friend.name).tag(friend as Person?)
-                        }
-                    }
-                    .pickerStyle(.automatic)
-                    
-                    Button("Save expense"){
-                        vm.addExpense(expenseAmount)
-                        expenseAmount = 0
-                    }
-                }
-                
-                    ForEach(vm.friends) { friend in
-                        HStack {
-                            Text(friend.name)
-                                .font(.headline)
-                            Spacer()
-                            Text("\(friend.spendedCash)")
-                                .font(.callout)
-                        }
-                    }
-                
-            }
-            .navigationTitle("Detail Spliter")
-            .toolbar {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done"){
-                        isFocused = false
-                    }
-                }
-            }
+        }
+        .sheet(isPresented: $showingAddScreenFriend) {
+            AddPersonView()
+                .presentationDetents([.medium])
+            
+        }
+        .sheet(isPresented: $showingAddScreenEvent){
+            AddEventView()
+                .presentationDetents([.medium])
         }
     }
 }
