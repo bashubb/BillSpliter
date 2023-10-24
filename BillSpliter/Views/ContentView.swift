@@ -18,7 +18,7 @@ struct ContentView: View {
                 
                 // Amount
                 Section {
-                    TextField("Check Amount", value: $bill.checkAmount, format: .currency(code: bill.localCurrency))
+                    TextField("Check Amount", value: $bill.checkAmount, format: .currency(code: Bill.localCurrency))
                         .keyboardType(.decimalPad)
                         .focused($isCheckAmountFocused)
                     
@@ -48,7 +48,7 @@ struct ContentView: View {
                 
                 // Amount per person
                 Section {
-                    Text(bill.total.1, format: .currency(code: bill.localCurrency))
+                    Text(bill.total.1, format: .currency(code: Bill.localCurrency))
                         .noTipColor(tipAmount: bill.tipAmount(isTipInPercent: bill.isTipInPercent), check: bill.checkAmount)
                 } header: {
                     Text("AMOUNT PER PERSON")
@@ -57,7 +57,7 @@ struct ContentView: View {
                 
                 // Total amount
                 Section {
-                    Text(bill.total.0, format: .currency(code: bill.localCurrency))
+                    Text(bill.total.0, format: .currency(code: Bill.localCurrency))
                         .noTipColor(tipAmount: bill.tipAmount(isTipInPercent: bill.isTipInPercent), check: bill.checkAmount)
                 } header: {
                     Text("TOTAL WITH TIP")
@@ -111,7 +111,7 @@ struct TipChooseView: View {
                 HStack {
                     Text("Enter your tip")
                     
-                    TextField("Your tip", value: $bill.tipAmountinCash, format: .currency(code: bill.localCurrency) )
+                    TextField("Your tip", value: $bill.tipAmountinCash, format: .currency(code: Bill.localCurrency) )
                         .textFieldStyle(.roundedBorder)
                         .keyboardType(.decimalPad)
                         .focused($isTipAmountFocused)

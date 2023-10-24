@@ -17,7 +17,7 @@ class Bill: ObservableObject {
     
     
     
-    var localCurrency = Locale.current.currency?.identifier ?? "PLN"
+    static var localCurrency = Locale.current.currency?.identifier ?? "PLN"
     
     var total: (Double, Double) {
         // calculate total with tip and total per person
