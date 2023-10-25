@@ -25,5 +25,8 @@ extension ExpenseEntity {
 }
 
 extension ExpenseEntity : Identifiable {
-
+    
+    public var wrappedName: String {
+        name ?? "UnknownName"
+    }
 }

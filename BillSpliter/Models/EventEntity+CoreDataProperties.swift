@@ -41,5 +41,12 @@ extension EventEntity {
 }
 
 extension EventEntity : Identifiable {
-
+    
+    public var expenseArray: [ExpenseEntity] {
+        let set  = expense as? Set<ExpenseEntity> ?? []
+        
+        return set.sorted {
+            $0.wrappedName < $1.wrappedName
+        }
+    }
 }

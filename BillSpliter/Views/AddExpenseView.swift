@@ -40,9 +40,9 @@ struct AddExpenseView: View {
                     }
                 }
                 
-                Picker("Choose who pays", selection: $name) {
+                Picker("Choose who pays", selection: $person) {
                     ForEach(friends) {friend in
-                        Text(friend.name ?? "Unknown name")
+                        Text(friend.name ?? "Unknown name").tag(friend as PersonEntity?)
                     }
                 }
             }
@@ -75,7 +75,7 @@ struct AddExpenseView: View {
                         Do you want to add this expense:
                         name - \(name)
                         amount - \(amount)
-                        who pays - \(person!)
+                        who pays - \(person?.name ?? "" )
                         """)
             
         }

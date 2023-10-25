@@ -32,7 +32,12 @@ struct DetailSplitterView: View {
                                     NavigationLink {
                                         EventEditView(event: event)
                                     } label: {
-                                        Text(event.name ?? "Unknown name")
+                                        HStack {
+                                            Text(event.name ?? "Unknown name")
+                                            Spacer()
+                                            Text(event.date?.formatted(date: .complete, time: .omitted) ?? "Unknown date")
+                                        }
+                                    
                                     }
 
                                 }

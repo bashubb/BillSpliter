@@ -9,25 +9,42 @@ import SwiftUI
 
 struct EventEditView: View {
     @Environment(\.managedObjectContext) var moc
-    @FetchRequest<ExpenseEntity>(sortDescriptors: [],
-                                 predicate: <#T##NSPredicate?#>)
+    @FetchRequest<EventEntity>(sortDescriptors: []) var fetchedEvents
     
-    var event: EventEntity?
+    var event: EventEntity
     
-
+    
     var body: some View {
-        NavigationStack {
-            Form {
-                Text("Your expenses for this event")
-                
-                Text("Add some expenses for event \(event?.name ?? "Unknown event")")
-                
-                NavigationLink("Add expense") {
-                    AddExpenseView(event: event)
+        VStack {
+            Text("Your expenses for event \(event.name ?? "Unknown name")")
+                .font(.title)
+                .padding()
+                .background(Color.gray.opacity(0.8))
+            
+            ForEach(fetchedEvents) {fetchedEvent in
+                if fetchedEvent.id == event.id {
+                    if fetchedEvent.expenseArray.isEmpty {
+                        Text("Looks like you don't have any expenses for this event add some!")
+                    } else {
+                        ForEach(fetchedEvent.expenseArray) { expense in
+                            Section {
+                                Text(expense.wrappedName)
+                                    .font(.headline)
+                                Text(expense.person?.name ?? "Unknown name")
+                                    .font(.caption)
+                                Text(String(expense.amount))
+                                    .font(.caption)
+                            }
+                        }
+                    }
                 }
             }
             
             
+            
+            NavigationLink("Add expense") {
+                AddExpenseView(event: event)
+            }
         }
     }
 }
