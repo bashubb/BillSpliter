@@ -11,42 +11,69 @@ struct EventEditView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest<EventEntity>(sortDescriptors: []) var fetchedEvents
     
+    @State private var showingAddExpense = false
+    @State private var expensesForEventEmpty = false
+    
     var event: EventEntity
     
     
     var body: some View {
-        VStack {
-            Text("Your expenses for event \(event.name ?? "Unknown name")")
-                .font(.title)
-                .padding()
-                .background(Color.gray.opacity(0.8))
+        
+        Form {
             
-            ForEach(fetchedEvents) {fetchedEvent in
-                if fetchedEvent.id == event.id {
-                    if fetchedEvent.expenseArray.isEmpty {
-                        Text("Looks like you don't have any expenses for this event add some!")
-                    } else {
-                        ForEach(fetchedEvent.expenseArray) { expense in
-                            Section {
-                                Text(expense.wrappedName)
-                                    .font(.headline)
-                                Text(expense.person?.name ?? "Unknown name")
-                                    .font(.caption)
-                                Text(String(expense.amount))
-                                    .font(.caption)
+            if expensesForEventEmpty {
+                Text("Looks like you don't have any expenses for this event add some!")
+            } else {
+                
+                Section {
+                    ForEach(fetchedEvents) {fetchedEvent in
+                        if fetchedEvent.id == event.id {
+                            ForEach(fetchedEvent.expenseArray) { expense in
+                                VStack(alignment: .leading) {
+                                    Text(expense.wrappedName)
+                                        .font(.headline)
+                                    Text(expense.person?.name ?? "Unknown name")
+                                        .font(.callout)
+                                    Text(String(expense.amount))
+                                        .font(.callout)
+                                }
                             }
                         }
                     }
+                } header: {
+                    Text("Your expenses for event \(event.name ?? "Unknown name")")
                 }
+                
             }
             
             
-            
-            NavigationLink("Add expense") {
-                AddExpenseView(event: event)
+            Button("Add expense") {
+                showingAddExpense = true
             }
         }
+        .onAppear{
+            expensesForEventEmpty = isEventEmpty(fetchedEvents: fetchedEvents, event: event)
+        }
+        .navigationTitle("Expenses")
+        .sheet(isPresented: $showingAddExpense) {
+            AddExpenseView(event: event)
+        }
+        
+        
     }
+    
+    
+    func isEventEmpty(fetchedEvents: FetchedResults<EventEntity> , event: EventEntity) -> Bool {
+        for fetchedEvent in fetchedEvents{
+            if fetchedEvent.id == event.id {
+               return fetchedEvent.expenseArray.isEmpty
+            }
+        }
+        return true
+    }
+    
+    
 }
+
 
 

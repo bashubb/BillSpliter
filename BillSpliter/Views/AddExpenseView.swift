@@ -23,29 +23,34 @@ struct AddExpenseView: View {
     
     
     var body: some View {
-        Form {
-            Section {
-                TextField("name ", text: $name)
-                TextField("amount", value: $amount, format: .currency(code: Bill.localCurrency))
+        ZStack {
+            Form {
+                Section("Fill expense info") {
+                    TextField("expense name ", text: $name)
+                    TextField("expense amount", value: $amount, format: .currency(code: Bill.localCurrency))
+                    
+                }
                 
-            }
-            
-            Section("Who pays") {
-                if friends.isEmpty {
-                    Text("You have no firends on your list! Add some!")
-                        .font(.footnote)
-                        .foregroundStyle(Color.red.opacity(0.8))
+                Section("Who pays") {
+                    if friends.isEmpty {
+                        Text("You have no firends on your list! Add some!")
+                            .font(.footnote)
+                            .foregroundStyle(Color.red.opacity(0.8))
+                    } else {
+                        
+                        Picker("Choose who pays", selection: $person) {
+                            ForEach(friends) {friend in
+                                Text(friend.name ?? "Unknown name").tag(friend as PersonEntity?)
+                            }
+                        }
+                    }
+                    
                     Button("Add a new friend"){
                         showingAddScreenFriend = true
                     }
                 }
-                
-                Picker("Choose who pays", selection: $person) {
-                    ForEach(friends) {friend in
-                        Text(friend.name ?? "Unknown name").tag(friend as PersonEntity?)
-                    }
-                }
             }
+            
             
             Button("Save the expense") {
                 let expense = ExpenseEntity(context: moc)
@@ -56,33 +61,47 @@ struct AddExpenseView: View {
                 expense.person = person!
                 showingConfirmationAlert = true
             }
+            .buttonStyle(.borderedProminent)
             .disabled(person == nil || name == "" || amount == 0 )
             
-            
-            
+        }
+        .sheet(isPresented:$showingAddScreenFriend){
+            AddPersonView()
         }
         .alert("Save expense?", isPresented: $showingConfirmationAlert) {
-            Button("Save", role:.none) {
+            Button {
                 try? moc.save()
                 name = ""
                 amount = 0.0
                 person = nil
                 
                 dismiss()
+            } label: {
+                Text("Save")
+                    .foregroundStyle(Color.green)
             }
-        } message: {
-            Text("""
-                        Do you want to add this expense:
-                        name - \(name)
-                        amount - \(amount)
-                        who pays - \(person?.name ?? "" )
-                        """)
+                
+        }message: {
+            VStack(alignment:.leading) {
+                Text("Do you want to add this expense:")
+                    .font(.headline)
+                Group {
+                    Text("name - \(name)")
+                    Text("amount - \(amount)")
+                    Text("who pays - \(person?.name ?? "")")
+                }
+                .font(.callout)
+            }
+            .padding()
+             
             
         }
+        
     }
-
 }
 
 #Preview {
-    AddExpenseView()
+    NavigationStack {
+        AddExpenseView()
+    }
 }

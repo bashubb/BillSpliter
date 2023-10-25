@@ -37,7 +37,6 @@ struct AddEventView: View {
                     }
                     
                 }
-                .frame(height:300)
                 .toolbar {
                     ToolbarItemGroup(placement: .keyboard) {
                         Spacer()
@@ -46,11 +45,7 @@ struct AddEventView: View {
                         }
                     }
             }
-            
         }
-        .frame(height: 300)
-        
-        
     }
 }
 

@@ -16,41 +16,38 @@ struct DetailSplitterView: View {
     @State private var showingAddScreenEvent = false
     
     var body: some View {
-        ZStack {
-            NavigationStack {
-                Form {
-                    
-                    
-                    Section("Events") {
-                        if events.isEmpty {
-                            Text("You have no events on your list! Add some!")
-                                .font(.footnote)
-                                .foregroundStyle(Color.red.opacity(0.8))
-                        } else {
-                            List {
-                                ForEach(events) {event in
-                                    NavigationLink {
-                                        EventEditView(event: event)
-                                    } label: {
-                                        HStack {
-                                            Text(event.name ?? "Unknown name")
-                                            Spacer()
-                                            Text(event.date?.formatted(date: .complete, time: .omitted) ?? "Unknown date")
-                                        }
-                                    
+        
+        NavigationStack {
+            Form {
+                
+                
+                Section("Events") {
+                    if events.isEmpty {
+                        Text("You have no events on your list! Add some!")
+                            .font(.footnote)
+                            .foregroundStyle(Color.red.opacity(0.8))
+                    } else {
+                        List {
+                            ForEach(events) {event in
+                                NavigationLink {
+                                    EventEditView(event: event)
+                                } label: {
+                                    HStack {
+                                        Text(event.name ?? "Unknown name")
+                                        Spacer()
+                                        Text(event.date?.formatted(date: .complete, time: .omitted) ?? "Unknown date")
                                     }
-
                                 }
                             }
                         }
-                        
-                        Button("Add a new event"){
-                            showingAddScreenEvent = true
-                        }
+                    }
+                    
+                    Button("Add a new event"){
+                        showingAddScreenEvent = true
                     }
                 }
-                .navigationTitle("Detail Splitter")
             }
+            .navigationTitle("Detail Splitter")
         }
         .sheet(isPresented: $showingAddScreenFriend) {
             AddPersonView()
