@@ -15,35 +15,41 @@ struct AddEventView: View {
     @FocusState var isFocused: Bool
     
     var body: some View {
-        Form {
-            Section("ADD EVENT") {
-                TextField("event name", text: $name)
-                    .focused($isFocused)
-                    .autocorrectionDisabled()
-                    
-                Button("Save") {
-                    let newEvent = EventEntity(context: moc)
-                    newEvent.id = UUID()
-                    newEvent.date = Date()
-                    newEvent.name = name
-                    try? moc.save()
-                    
-                    name = ""
-                    dismiss()
+        VStack {
+            Form {
+                    Section("ADD EVENT") {
+                        TextField("event name", text: $name)
+                            .focused($isFocused)
+                            .autocorrectionDisabled()
+                        
+                        Button("Save") {
+                            let newEvent = EventEntity(context: moc)
+                            newEvent.id = UUID()
+                            newEvent.date = Date()
+                            newEvent.name = name
+                            try? moc.save()
+                            
+                            name = ""
+                            dismiss()
+                            
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
                     
                 }
-                .buttonStyle(.borderedProminent)
+                .frame(height:300)
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+                        Button("Done"){
+                            isFocused = false
+                        }
+                    }
             }
             
         }
-        .toolbar {
-            ToolbarItemGroup(placement: .keyboard) {
-                Spacer()
-                Button("Done"){
-                    isFocused = false
-                }
-            }
-        }
+        .frame(height: 300)
+        
         
     }
 }

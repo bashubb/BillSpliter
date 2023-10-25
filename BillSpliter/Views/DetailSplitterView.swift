@@ -16,46 +16,36 @@ struct DetailSplitterView: View {
     @State private var showingAddScreenEvent = false
     
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("Friends to share expenses") {
-                    if friends.isEmpty {
-                        Text("You have no firends on your list! Add some!")
-                            .font(.footnote)
-                            .foregroundStyle(Color.red.opacity(0.8))
-                    } else {
-                        List {
-                            ForEach(friends) {friend in
-                                Text(friend.name ?? "Unknown name")
+        ZStack {
+            NavigationStack {
+                Form {
+                    
+                    
+                    Section("Events") {
+                        if events.isEmpty {
+                            Text("You have no events on your list! Add some!")
+                                .font(.footnote)
+                                .foregroundStyle(Color.red.opacity(0.8))
+                        } else {
+                            List {
+                                ForEach(events) {event in
+                                    NavigationLink {
+                                        EventEditView(event: event)
+                                    } label: {
+                                        Text(event.name ?? "Unknown name")
+                                    }
+
+                                }
                             }
                         }
-                    }
-                    
-                    Button("Add a new friend"){
-                        showingAddScreenFriend = true
-                    }
-                }
-                
-                Section("Events") {
-                    if events.isEmpty {
-                        Text("You have no events on your list! Add some!")
-                            .font(.footnote)
-                            .foregroundStyle(Color.red.opacity(0.8))
-                    } else {
-                        List {
-                            ForEach(events) {event in
-                                Text(event.name ?? "Unknown name")
-                            }
+                        
+                        Button("Add a new event"){
+                            showingAddScreenEvent = true
                         }
                     }
-                    
-                    Button("Add a new event"){
-                        showingAddScreenEvent = true
-                    }
                 }
+                .navigationTitle("Detail Splitter")
             }
-            .navigationTitle("Detail Splitter")
-            
         }
         .sheet(isPresented: $showingAddScreenFriend) {
             AddPersonView()
