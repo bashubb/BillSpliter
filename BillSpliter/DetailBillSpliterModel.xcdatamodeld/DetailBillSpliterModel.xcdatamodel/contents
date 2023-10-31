@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="EventEntity" representedClassName="EventEntity" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" optional="YES" attributeType="Date" defaultDateTimeInterval="720477300" usesScalarValueType="NO"/>
+        <attribute name="eventMembers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[PersonEntity : Double]"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="total" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="event" inverseEntity="ExpenseEntity"/>
     </entity>
     <entity name="ExpenseEntity" representedClassName="ExpenseEntity" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="expenseMembers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName="[PersonEntity : Double]"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventEntity" inverseName="expense" inverseEntity="EventEntity"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonEntity" inverseName="expense" inverseEntity="PersonEntity"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PersonEntity" inverseName="expense" inverseEntity="PersonEntity"/>
     </entity>
     <entity name="PersonEntity" representedClassName="PersonEntity" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="person" inverseEntity="ExpenseEntity"/>
+        <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="owner" inverseEntity="ExpenseEntity"/>
     </entity>
 </model>

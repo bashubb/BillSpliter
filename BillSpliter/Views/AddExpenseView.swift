@@ -16,7 +16,7 @@ struct AddExpenseView: View {
     
     @State private var name = ""
     @State private var amount = 0.0
-    @State private var person: PersonEntity?
+    @State private var owner: PersonEntity?
     
     @State private var showingAddScreenFriend = false
     @State private var showingConfirmationAlert = false
@@ -38,7 +38,7 @@ struct AddExpenseView: View {
                             .foregroundStyle(Color.red.opacity(0.8))
                     } else {
                         
-                        Picker("Choose who pays", selection: $person) {
+                        Picker("Choose who pays", selection: $owner) {
                             ForEach(friends) {friend in
                                 Text(friend.name ?? "Unknown name").tag(friend as PersonEntity?)
                             }
@@ -58,11 +58,11 @@ struct AddExpenseView: View {
                 expense.amount = amount
                 expense.event = event
                 expense.name = name
-                expense.person = person!
+                expense.owner = owner!
                 showingConfirmationAlert = true
             }
             .buttonStyle(.borderedProminent)
-            .disabled(person == nil || name == "" || amount == 0 )
+            .disabled(owner == nil || name == "" || amount == 0 )
             
         }
         .sheet(isPresented:$showingAddScreenFriend){
@@ -73,7 +73,7 @@ struct AddExpenseView: View {
                 try? moc.save()
                 name = ""
                 amount = 0.0
-                person = nil
+                owner = nil
                 
                 dismiss()
             } label: {
@@ -82,17 +82,16 @@ struct AddExpenseView: View {
             }
                 
         }message: {
-            VStack(alignment:.leading) {
+            
                 Text("Do you want to add this expense:")
                     .font(.headline)
                 Group {
                     Text("name - \(name)")
                     Text("amount - \(amount)")
-                    Text("who pays - \(person?.name ?? "")")
+                    Text("who pays - \(owner?.name ?? "")")
                 }
                 .font(.callout)
-            }
-            .padding()
+          
              
             
         }

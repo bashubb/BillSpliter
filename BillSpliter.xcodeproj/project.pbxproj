@@ -25,6 +25,7 @@
 		B5B126B72ACC1B3300DB61AE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B126B62ACC1B3300DB61AE /* ContentView.swift */; };
 		B5B126B92ACC1B3500DB61AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126B82ACC1B3500DB61AE /* Assets.xcassets */; };
 		B5B126BC2ACC1B3500DB61AE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B126BB2ACC1B3500DB61AE /* Preview Assets.xcassets */; };
+		B5C1DB052AF1A2F400638486 /* AddPersonToEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C1DB042AF1A2F300638486 /* AddPersonToEventView.swift */; };
 		B5F48D002AD82361009DDB00 /* Bill.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48CFF2AD82361009DDB00 /* Bill.swift */; };
 		B5F48D082AD84620009DDB00 /* BillSpliterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */; };
 		B5F48D0F2AD92ADD009DDB00 /* PublishedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F48D0E2AD92ADD009DDB00 /* PublishedTests.swift */; };
@@ -61,6 +62,7 @@
 		B5B126B62ACC1B3300DB61AE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B5B126B82ACC1B3500DB61AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5B126BB2ACC1B3500DB61AE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B5C1DB042AF1A2F300638486 /* AddPersonToEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonToEventView.swift; sourceTree = "<group>"; };
 		B5F48CFF2AD82361009DDB00 /* Bill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bill.swift; sourceTree = "<group>"; };
 		B5F48D052AD84620009DDB00 /* BillSpliterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BillSpliterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F48D072AD84620009DDB00 /* BillSpliterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillSpliterTests.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				B51872032AE8F9DC0077B107 /* AddExpenseView.swift */,
 				B51871F02AE848480077B107 /* AddPersonView.swift */,
 				B51871FE2AE85D4D0077B107 /* AddEventView.swift */,
+				B5C1DB042AF1A2F300638486 /* AddPersonToEventView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C1DB052AF1A2F400638486 /* AddPersonToEventView.swift in Sources */,
 				B51871F82AE859390077B107 /* PersonEntity+CoreDataClass.swift in Sources */,
 				B51872012AE8F60F0077B107 /* EventEditView.swift in Sources */,
 				B5B126B72ACC1B3300DB61AE /* ContentView.swift in Sources */,

@@ -12,7 +12,14 @@ struct EventEditView: View {
     @FetchRequest<EventEntity>(sortDescriptors: []) var fetchedEvents
     
     @State private var showingAddExpense = false
-    @State private var expensesForEventEmpty = false
+    var expensesForEventEmpty: Bool {
+        for fetchedEvent in fetchedEvents{
+            if fetchedEvent.id == event.id {
+               return fetchedEvent.expenseArray.isEmpty
+            }
+        }
+        return true
+    }
     
     var event: EventEntity
     
@@ -32,7 +39,7 @@ struct EventEditView: View {
                                 VStack(alignment: .leading) {
                                     Text(expense.wrappedName)
                                         .font(.headline)
-                                    Text(expense.person?.name ?? "Unknown name")
+                                    Text(expense.owner?.name ?? "Unknown name")
                                         .font(.callout)
                                     Text(String(expense.amount))
                                         .font(.callout)
@@ -51,9 +58,6 @@ struct EventEditView: View {
                 showingAddExpense = true
             }
         }
-        .onAppear{
-            expensesForEventEmpty = isEventEmpty(fetchedEvents: fetchedEvents, event: event)
-        }
         .navigationTitle("Expenses")
         .sheet(isPresented: $showingAddExpense) {
             AddExpenseView(event: event)
@@ -61,17 +65,6 @@ struct EventEditView: View {
         
         
     }
-    
-    
-    func isEventEmpty(fetchedEvents: FetchedResults<EventEntity> , event: EventEntity) -> Bool {
-        for fetchedEvent in fetchedEvents{
-            if fetchedEvent.id == event.id {
-               return fetchedEvent.expenseArray.isEmpty
-            }
-        }
-        return true
-    }
-    
     
 }
 
