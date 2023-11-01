@@ -91,6 +91,7 @@ struct AddExpenseView: View {
                     Text("who pays - \(owner?.name ?? "")")
                 }
                 .font(.callout)
+                
           
              
             

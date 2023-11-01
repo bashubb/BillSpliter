@@ -16,47 +16,109 @@ struct AddEventView: View {
     @State private var name = ""
     @FocusState var isFocused: Bool
     
+    var fontColor = Color(hue: 1.0, saturation: 0.069, brightness: 0.288)
+    
     var body: some View {
         NavigationStack {
-            Form {
-                    Section("ADD EVENT") {
+            ZStack {
+                Color(red: 0.949, green: 0.949, blue: 0.971)
+                    .ignoresSafeArea()
+                
+                VStack(spacing:0) {
+                    VStack(alignment: .leading) {
+                        Text("Create the EVENT")
+                            .font(.subheadline)
+                            .foregroundStyle(fontColor)
                         TextField("event name", text: $name)
                             .focused($isFocused)
                             .autocorrectionDisabled()
-                        
-                        NavigationLink(destination: AddPersonToEventView(members: $members)) {
-                            Text("Add some friends")
+                            .padding()
+                            .background(Color.white, in: RoundedRectangle(cornerRadius: 8))
+                    }
+                    .padding()
+                    
+                    
+                    
+                    
+                    
+                    VStack (alignment:.leading){
+                        Text("Friends you're adding to event \(name)")
+                            .font(.subheadline)
+                            .foregroundStyle(fontColor)
+                        VStack(alignment: .leading) {
+                            if members.isEmpty {
+                                Text("There are no firends in this event, add some!")
+                                    .font(.callout)
+                                    .foregroundStyle(Color.red.opacity(0.5))
+                            } else {
+                                List {
+                                    ForEach(members) {member in
+                                        Text(member.name!)
+                                            .font(.callout)
+                                    }.onDelete { offsets in
+                                        members.remove(atOffsets: offsets)
+                                    }
+                                }
+                                .listStyle(.plain)
+                                
+                            }
+                            NavigationLink(destination: AddPersonToEventView(members: $members)) {
+                                Text("Add some friends")
+                                    .font(.callout)
+                            }
+                            .buttonStyle(.bordered)
                         }
+                        .padding()
+                        .background(Color.white, in: .rect(cornerRadius: 8))
+                       
                         
-                        Text("Friends added to event \(name)")
-                        List(members) {member in
-                            Text(member.name!)
-                        }
+                      
                         
-                        Button("Save") {
-                            let newEvent = EventEntity(context: moc)
-                            newEvent.id = UUID()
-                            newEvent.date = Date()
-                            newEvent.name = name
-                            try? moc.save()
-                            
+                        Button {
+                            createEvent()
                             name = ""
                             dismiss()
-                            
+                        } label: {
+                            Text("Create event")
+                                .font(.title2)
                         }
-                        .buttonStyle(.borderedProminent)
+                        .padding()
+                        .background(Color.blue.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
+                        .foregroundStyle(Color.white)
+                        .padding(.top, 20)
+                        
                     }
-                    
+                    .padding([.horizontal, .bottom])
+                   
                 }
-                .toolbar {
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Spacer()
-                        Button("Done"){
-                            isFocused = false
-                        }
-                    }
+                
+                
+                
+                
+                
             }
+            .toolbar {
+                ToolbarItemGroup(placement: .keyboard) {
+                    Spacer()
+                    Button("Done"){
+                        isFocused = false
+                    }
+                }
+            }
+            
         }
+    }
+    
+    func createEvent() {
+        let newEvent = EventEntity(context: moc)
+        newEvent.id = UUID()
+        newEvent.date = Date()
+        newEvent.name = name
+        for member in members {
+            newEvent.eventMembers?[member] = 0.0
+        }
+        
+        try? moc.save()
     }
 }
 
