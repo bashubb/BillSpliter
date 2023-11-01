@@ -74,6 +74,13 @@ struct AddExpenseView: View {
                 expense.event = event
                 expense.name = name
                 expense.owner = owner!
+                expense.expenseMembers = [PersonEntity : Double]()
+                for member in expenseMembers {
+                    expense.expenseMembers![member] = calculateForPerson()
+                }
+                for (k, v) in expense.wrappedExpenseMembers {
+                    print(k , v)
+                }
                 showingConfirmationAlert = true
             }
             .buttonStyle(.borderedProminent)
@@ -106,12 +113,12 @@ struct AddExpenseView: View {
                     Text("who pays - \(owner?.name ?? "")")
                 }
                 .font(.callout)
-                
-          
-             
-            
         }
         
+    }
+    
+    func calculateForPerson() -> Double {
+        amount / Double(expenseMembers.count)
     }
 }
 

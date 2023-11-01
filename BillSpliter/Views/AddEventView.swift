@@ -51,7 +51,7 @@ struct AddEventView: View {
                             } else {
                                 List {
                                     ForEach(members) {member in
-                                        Text(member.name!)
+                                        Text(member.wrappedName)
                                             .font(.callout)
                                     }.onDelete { offsets in
                                         members.remove(atOffsets: offsets)
@@ -108,10 +108,11 @@ struct AddEventView: View {
         newEvent.id = UUID()
         newEvent.date = Date()
         newEvent.name = name
+        newEvent.eventMembers = [PersonEntity: Double]()
         for member in members {
-            newEvent.eventMembers?[member] = 0.0
+            newEvent.eventMembers![member] = 0.0
         }
-        
+       
         try? moc.save()
     }
 }

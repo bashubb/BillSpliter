@@ -2,7 +2,7 @@
 //  EventEntity+CoreDataProperties.swift
 //  BillSpliter
 //
-//  Created by HubertMac on 31/10/2023.
+//  Created by HubertMac on 01/11/2023.
 //
 //
 
@@ -17,9 +17,9 @@ extension EventEntity {
     }
 
     @NSManaged public var date: Date?
+    @NSManaged public var eventMembers: [PersonEntity : Double]?
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
-    @NSManaged public var eventMembers: [PersonEntity : Double]?
     @NSManaged public var total: Double
     @NSManaged public var expense: NSSet?
 
@@ -41,6 +41,7 @@ extension EventEntity {
     @NSManaged public func removeFromExpense(_ values: NSSet)
 
 }
+
 
 extension EventEntity : Identifiable {
     
@@ -69,3 +70,4 @@ extension EventEntity : Identifiable {
         }
     }
 }
+

@@ -2,7 +2,7 @@
 //  ExpenseEntity+CoreDataProperties.swift
 //  BillSpliter
 //
-//  Created by HubertMac on 31/10/2023.
+//  Created by HubertMac on 01/11/2023.
 //
 //
 
@@ -17,13 +17,14 @@ extension ExpenseEntity {
     }
 
     @NSManaged public var amount: Double
+    @NSManaged public var expenseMembers: [PersonEntity : Double]?
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
-    @NSManaged public var expenseMembers: [PersonEntity : Double]?
     @NSManaged public var event: EventEntity?
     @NSManaged public var owner: PersonEntity?
 
 }
+
 
 extension ExpenseEntity : Identifiable {
     
@@ -35,7 +36,7 @@ extension ExpenseEntity : Identifiable {
         id ?? UUID()
     }
     
-    public var wrpappedExpenseMembers: [PersonEntity : Double] {
+    public var wrappedExpenseMembers: [PersonEntity : Double] {
         expenseMembers ?? [:]
     }
     
@@ -47,3 +48,4 @@ extension ExpenseEntity : Identifiable {
         owner ?? PersonEntity()
     }
 }
+

@@ -2,7 +2,7 @@
 //  PersonEntity+CoreDataProperties.swift
 //  BillSpliter
 //
-//  Created by HubertMac on 24/10/2023.
+//  Created by HubertMac on 01/11/2023.
 //
 //
 
@@ -16,8 +16,8 @@ extension PersonEntity {
         return NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var id: UUID?
+    @NSManaged public var name: String?
     @NSManaged public var expense: NSSet?
 
 }
@@ -57,3 +57,4 @@ extension PersonEntity : Identifiable {
         }
     }
 }
+

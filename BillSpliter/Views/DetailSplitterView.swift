@@ -32,10 +32,16 @@ struct DetailSplitterView: View {
                                 NavigationLink {
                                     EventEditView(event: event)
                                 } label: {
-                                    HStack {
-                                        Text(event.wrappedName)
-                                        Spacer()
-                                        Text(event.wrappedDate.formatted(date:.numeric, time: .omitted))
+                                    VStack {
+                                        HStack {
+                                            Text(event.wrappedName)
+                                            Spacer()
+                                            Text(event.wrappedDate.formatted(date:.numeric, time: .omitted))
+                                        }
+                                        // Show who owns whom
+                                        ForEach(Array(event.wrappedEventMembers.keys), id:\.self) { key in
+                                            Text("\(key.wrappedName) - \(event.wrappedEventMembers[key]!)")
+                                        }
                                     }
                                 }
                             }
@@ -60,3 +66,5 @@ struct DetailSplitterView: View {
     
     DetailSplitterView()
 }
+
+// TODO: REFACTOR ! Count who needs to get money back to who

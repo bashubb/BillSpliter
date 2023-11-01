@@ -44,6 +44,10 @@ struct EventEditView: View {
                                         .font(.callout)
                                     Text(String(expense.amount))
                                         .font(.callout)
+                                    // Show who owns whom
+                                    ForEach(Array(expense.wrappedExpenseMembers.keys), id:\.self) { key in
+                                        Text("\(key.wrappedName) - \(expense.wrappedExpenseMembers[key]!)")
+                                    }
                                 }
                             }
                         }
