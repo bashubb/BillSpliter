@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct AddPersonToEventView: View {
-    @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var friends: FetchedResults<PersonEntity>
-    
     @Binding var members: [PersonEntity]
+    
+    @State private var showingAddScreenFriend = false
+    
     var body: some View {
-        VStack {
+        NavigationStack {
             List {
                 ForEach(friends) {friend in
                     Button {
@@ -31,6 +32,16 @@ struct AddPersonToEventView: View {
                 }
             }
             .listStyle(.plain)
+            
+            Button("Add Friend"){
+                showingAddScreenFriend = true
+            }
+            
+            Spacer()
+        }
+        .sheet(isPresented: $showingAddScreenFriend) {
+            AddPersonView()
+                .presentationDetents([.medium])
         }
     }
 }

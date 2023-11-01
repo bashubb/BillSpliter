@@ -33,9 +33,9 @@ struct DetailSplitterView: View {
                                     EventEditView(event: event)
                                 } label: {
                                     HStack {
-                                        Text(event.name ?? "Unknown name")
+                                        Text(event.wrappedName)
                                         Spacer()
-                                        Text(event.date?.formatted(date: .complete, time: .omitted) ?? "Unknown date")
+                                        Text(event.wrappedDate.formatted(date:.numeric, time: .omitted))
                                     }
                                 }
                             }
@@ -49,14 +49,9 @@ struct DetailSplitterView: View {
             }
             .navigationTitle("Detail Splitter")
         }
-        .sheet(isPresented: $showingAddScreenFriend) {
-            AddPersonView()
-                .presentationDetents([.medium])
-            
-        }
         .sheet(isPresented: $showingAddScreenEvent){
             AddEventView()
-                .presentationDetents([.medium])
+                .presentationDetents([.medium, .large])
         }
     }
 }

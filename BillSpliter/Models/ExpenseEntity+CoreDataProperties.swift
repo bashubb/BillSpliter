@@ -30,4 +30,20 @@ extension ExpenseEntity : Identifiable {
     public var wrappedName: String {
         name ?? "UnknownName"
     }
+    
+    public var wrappedID: UUID {
+        id ?? UUID()
+    }
+    
+    public var wrpappedExpenseMembers: [PersonEntity : Double] {
+        expenseMembers ?? [:]
+    }
+    
+    public var wrappedEvent: EventEntity {
+        event ?? EventEntity()
+    }
+    
+    public var wrappedOwner: PersonEntity {
+        owner ?? PersonEntity()
+    }
 }

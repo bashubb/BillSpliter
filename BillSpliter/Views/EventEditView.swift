@@ -12,6 +12,7 @@ struct EventEditView: View {
     @FetchRequest<EventEntity>(sortDescriptors: []) var fetchedEvents
     
     @State private var showingAddExpense = false
+    
     var expensesForEventEmpty: Bool {
         for fetchedEvent in fetchedEvents{
             if fetchedEvent.id == event.id {

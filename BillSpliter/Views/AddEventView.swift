@@ -17,11 +17,12 @@ struct AddEventView: View {
     @FocusState var isFocused: Bool
     
     var fontColor = Color(hue: 1.0, saturation: 0.069, brightness: 0.288)
+    var backgroundColor = Color(red: 0.949, green: 0.949, blue: 0.971)
     
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(red: 0.949, green: 0.949, blue: 0.971)
+                backgroundColor
                     .ignoresSafeArea()
                 
                 VStack(spacing:0) {
@@ -36,9 +37,6 @@ struct AddEventView: View {
                             .background(Color.white, in: RoundedRectangle(cornerRadius: 8))
                     }
                     .padding()
-                    
-                    
-                    
                     
                     
                     VStack (alignment:.leading){
@@ -70,9 +68,10 @@ struct AddEventView: View {
                         }
                         .padding()
                         .background(Color.white, in: .rect(cornerRadius: 8))
-                       
                         
-                      
+                        
+                        
+                        // TODO: Disabled if no name, no friends , bug: when sheet expends view stays in the middle
                         
                         Button {
                             createEvent()
@@ -86,15 +85,10 @@ struct AddEventView: View {
                         .background(Color.blue.opacity(0.8), in: RoundedRectangle(cornerRadius: 8))
                         .foregroundStyle(Color.white)
                         .padding(.top, 20)
-                        
                     }
                     .padding([.horizontal, .bottom])
-                   
+                    
                 }
-                
-                
-                
-                
                 
             }
             .toolbar {

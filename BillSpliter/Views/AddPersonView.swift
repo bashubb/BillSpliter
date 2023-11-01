@@ -16,6 +16,7 @@ struct AddPersonView: View {
     
     
     var body: some View {
+        // TODO: change from Form into VStack for half sheet
         Form  {
             Section("Add Person"){
                 TextField("name", text: $name)

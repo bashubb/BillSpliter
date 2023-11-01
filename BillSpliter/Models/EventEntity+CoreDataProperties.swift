@@ -44,6 +44,23 @@ extension EventEntity {
 
 extension EventEntity : Identifiable {
     
+    public var wrappedDate: Date {
+        date ?? Date()
+    }
+    
+    public var wrappedID: UUID {
+        id ?? UUID()
+    }
+    
+    public var wrappedName: String {
+        name ?? "Unknown name"
+    }
+    
+    public var wrappedEventMembers: [PersonEntity : Double] {
+        eventMembers ?? [:]
+    }
+    
+    
     public var expenseArray: [ExpenseEntity] {
         let set  = expense as? Set<ExpenseEntity> ?? []
         

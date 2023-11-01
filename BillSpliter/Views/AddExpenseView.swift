@@ -20,6 +20,14 @@ struct AddExpenseView: View {
     
     @State private var showingAddScreenFriend = false
     @State private var showingConfirmationAlert = false
+    @State private var expenseMembers = [PersonEntity]()
+    
+    
+    var members: [PersonEntity] {
+        var members = [PersonEntity]()
+        event.wrappedEventMembers.keys.forEach { members.append($0)}
+            return members
+    }
     
     
     var body: some View {
@@ -39,17 +47,24 @@ struct AddExpenseView: View {
                     } else {
                         
                         Picker("Choose who pays", selection: $owner) {
-                            ForEach(friends) {friend in
-                                Text(friend.name ?? "Unknown name").tag(friend as PersonEntity?)
+                            ForEach(members , id: \.self) {eventMember in
+                                Text(eventMember.name ?? "Unknown name").tag(eventMember as PersonEntity?)
                             }
                         }
                     }
                     
-                    Button("Add a new friend"){
+                    
+                    // TODO: change adding fr
+                    Button("who's paying back?"){
                         showingAddScreenFriend = true
+                    }
+                    
+                    List(expenseMembers) {member in
+                        Text(member.wrappedName)
                     }
                 }
             }
+            
             
             
             Button("Save the expense") {
@@ -66,7 +81,7 @@ struct AddExpenseView: View {
             
         }
         .sheet(isPresented:$showingAddScreenFriend){
-            AddPersonView()
+            AddPersonToExpenseView(event: event, owner: owner, eventMembers: members, expenseMembers: $expenseMembers)
         }
         .alert("Save expense?", isPresented: $showingConfirmationAlert) {
             Button {
