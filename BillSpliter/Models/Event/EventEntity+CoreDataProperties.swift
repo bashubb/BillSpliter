@@ -2,7 +2,7 @@
 //  EventEntity+CoreDataProperties.swift
 //  BillSpliter
 //
-//  Created by HubertMac on 01/11/2023.
+//  Created by HubertMac on 02/11/2023.
 //
 //
 
@@ -17,11 +17,11 @@ extension EventEntity {
     }
 
     @NSManaged public var date: Date?
-    @NSManaged public var eventMembers: [PersonEntity : Double]?
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
     @NSManaged public var total: Double
     @NSManaged public var expense: NSSet?
+    @NSManaged public var eventMember: EventMember?
 
 }
 
@@ -42,7 +42,6 @@ extension EventEntity {
 
 }
 
-
 extension EventEntity : Identifiable {
     
     public var wrappedDate: Date {
@@ -57,9 +56,7 @@ extension EventEntity : Identifiable {
         name ?? "Unknown name"
     }
     
-    public var wrappedEventMembers: [PersonEntity : Double] {
-        eventMembers ?? [:]
-    }
+   
     
     
     public var expenseArray: [ExpenseEntity] {
@@ -70,4 +67,3 @@ extension EventEntity : Identifiable {
         }
     }
 }
-
