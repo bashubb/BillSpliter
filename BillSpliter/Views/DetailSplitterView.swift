@@ -39,9 +39,9 @@ struct DetailSplitterView: View {
                                             Text(event.wrappedDate.formatted(date:.numeric, time: .omitted))
                                         }
                                         // Show who owns whom
-                                        ForEach(Array(event.wrappedEventMembers.keys), id:\.self) { key in
-                                            Text("\(key.wrappedName) - \(event.wrappedEventMembers[key]!)")
-                                        }
+//                                        ForEach(Array(event.wrappedEventMembers.keys), id:\.self) { key in
+//                                            Text("\(key.wrappedName) - \(event.wrappedEventMembers[key]!)")
+//                                        }
                                     }
                                 }
                             }

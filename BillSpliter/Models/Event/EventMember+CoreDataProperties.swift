@@ -23,5 +23,13 @@ extension EventMember {
 }
 
 extension EventMember : Identifiable {
-
+    public var wrappedEventMember: PersonEntity {
+        eventMember ?? PersonEntity()
+    }
+    
+    public var wrappedEvent: EventEntity {
+        event ?? EventEntity()
+    }
+    
+  
 }

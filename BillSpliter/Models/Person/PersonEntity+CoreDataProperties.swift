@@ -92,4 +92,20 @@ extension PersonEntity : Identifiable {
             $0.wrappedName < $1.wrappedName
         }
     }
+    
+    public var expenseMemberArray: [ExpenseMember] {
+        let set  = expenseMember as? Set<ExpenseMember> ?? []
+        
+        return set.sorted {
+            $0.wrappedExpenseMember.wrappedName < $1.wrappedExpenseMember.wrappedName
+        }
+    }
+    
+    public var eventMemberArray: [EventMember] {
+        let set  = eventMember as? Set<EventMember> ?? []
+        
+        return set.sorted {
+            $0.wrappedEventMember.wrappedName < $1.wrappedEventMember.wrappedName
+        }
+    }
 }

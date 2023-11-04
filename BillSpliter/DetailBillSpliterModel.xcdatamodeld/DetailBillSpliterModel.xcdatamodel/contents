@@ -5,7 +5,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="total" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="eventMember" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EventMember" inverseName="event" inverseEntity="EventMember"/>
+        <relationship name="eventMember" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EventMember" inverseName="event" inverseEntity="EventMember"/>
         <relationship name="expense" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ExpenseEntity" inverseName="event" inverseEntity="ExpenseEntity"/>
     </entity>
     <entity name="EventMember" representedClassName="EventMember" syncable="YES">

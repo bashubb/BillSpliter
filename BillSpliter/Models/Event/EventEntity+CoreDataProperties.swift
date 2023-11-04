@@ -2,7 +2,7 @@
 //  EventEntity+CoreDataProperties.swift
 //  BillSpliter
 //
-//  Created by HubertMac on 02/11/2023.
+//  Created by HubertMac on 04/11/2023.
 //
 //
 
@@ -21,7 +21,7 @@ extension EventEntity {
     @NSManaged public var name: String?
     @NSManaged public var total: Double
     @NSManaged public var expense: NSSet?
-    @NSManaged public var eventMember: EventMember?
+    @NSManaged public var eventMember: NSSet?
 
 }
 
@@ -42,6 +42,23 @@ extension EventEntity {
 
 }
 
+// MARK: Generated accessors for eventMember
+extension EventEntity {
+
+    @objc(addEventMemberObject:)
+    @NSManaged public func addToEventMember(_ value: EventMember)
+
+    @objc(removeEventMemberObject:)
+    @NSManaged public func removeFromEventMember(_ value: EventMember)
+
+    @objc(addEventMember:)
+    @NSManaged public func addToEventMember(_ values: NSSet)
+
+    @objc(removeEventMember:)
+    @NSManaged public func removeFromEventMember(_ values: NSSet)
+
+}
+
 extension EventEntity : Identifiable {
     
     public var wrappedDate: Date {
@@ -57,8 +74,6 @@ extension EventEntity : Identifiable {
     }
     
    
-    
-    
     public var expenseArray: [ExpenseEntity] {
         let set  = expense as? Set<ExpenseEntity> ?? []
         
@@ -66,4 +81,13 @@ extension EventEntity : Identifiable {
             $0.wrappedName < $1.wrappedName
         }
     }
+    
+    public var eventMembersArray: [EventMember] {
+        let set  = eventMember as? Set<EventMember> ?? []
+        
+        return set.sorted {
+            $0.wrappedEventMember.wrappedName < $1.wrappedEventMember.wrappedName
+        }
+    }
 }
+

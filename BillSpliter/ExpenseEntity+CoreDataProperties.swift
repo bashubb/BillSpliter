@@ -60,5 +60,13 @@ extension ExpenseEntity : Identifiable {
     public var wrappedOwner: PersonEntity {
         owner ?? PersonEntity()
     }
+    
+    public var expenseMembersArray: [ExpenseMember] {
+        let set  = expenseMember as? Set<ExpenseMember> ?? []
+        
+        return set.sorted {
+            $0.wrappedExpenseMember.wrappedName < $1.wrappedExpenseMember.wrappedName
+        }
+    }
 }
 

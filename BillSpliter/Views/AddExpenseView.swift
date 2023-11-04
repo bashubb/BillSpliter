@@ -12,7 +12,7 @@ struct AddExpenseView: View {
     @FetchRequest(sortDescriptors: []) var friends: FetchedResults<PersonEntity>
     @Environment(\.dismiss) var dismiss
     
-    var event: EventEntity!
+    var event: EventEntity
     
     @State private var name = ""
     @State private var amount = 0.0
@@ -22,12 +22,6 @@ struct AddExpenseView: View {
     @State private var showingConfirmationAlert = false
     @State private var expenseMembers = [PersonEntity]()
     
-    
-    var members: [PersonEntity] {
-        var members = [PersonEntity]()
-        event.wrappedEventMembers.keys.forEach { members.append($0)}
-            return members
-    }
     
     
     var body: some View {
@@ -47,8 +41,8 @@ struct AddExpenseView: View {
                     } else {
                         
                         Picker("Choose who pays", selection: $owner) {
-                            ForEach(members , id: \.self) {eventMember in
-                                Text(eventMember.name ?? "Unknown name").tag(eventMember as PersonEntity?)
+                            ForEach(event.eventMembersArray) {member in
+                                Text(member.wrappedEventMember.wrappedName).tag(member.wrappedEventMember as PersonEntity?)
                             }
                         }
                     }
@@ -74,12 +68,14 @@ struct AddExpenseView: View {
                 expense.event = event
                 expense.name = name
                 expense.owner = owner!
-                expense.expenseMembers = [PersonEntity : Double]()
+                
+               
                 for member in expenseMembers {
-                    expense.expenseMembers![member] = calculateForPerson()
-                }
-                for (k, v) in expense.wrappedExpenseMembers {
-                    print(k , v)
+                    let newExpenseMember = ExpenseMember(context: moc)
+                    newExpenseMember.expenseMember = member
+                    newExpenseMember.expenseAmount = calculateForPerson()
+                    newExpenseMember.expense = expense
+                    
                 }
                 showingConfirmationAlert = true
             }
@@ -88,7 +84,7 @@ struct AddExpenseView: View {
             
         }
         .sheet(isPresented:$showingAddScreenFriend){
-            AddPersonToExpenseView(event: event, owner: owner, eventMembers: members, expenseMembers: $expenseMembers)
+            AddPersonToExpenseView(event: event, owner: owner, /*eventMembers: members*/ expenseMembers: $expenseMembers)
         }
         .alert("Save expense?", isPresented: $showingConfirmationAlert) {
             Button {
@@ -122,8 +118,4 @@ struct AddExpenseView: View {
     }
 }
 
-#Preview {
-    NavigationStack {
-        AddExpenseView()
-    }
-}
+

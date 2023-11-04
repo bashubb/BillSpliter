@@ -108,9 +108,12 @@ struct AddEventView: View {
         newEvent.id = UUID()
         newEvent.date = Date()
         newEvent.name = name
-        newEvent.eventMembers = [PersonEntity: Double]()
+       
         for member in members {
-            newEvent.eventMembers![member] = 0.0
+            let newMember = EventMember(context: moc)
+            newMember.eventMember = member
+            newMember.eventAmount = 0.0
+            newMember.event = newEvent
         }
        
         try? moc.save()

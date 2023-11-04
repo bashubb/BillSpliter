@@ -11,7 +11,7 @@ struct AddPersonToExpenseView: View {
 
     var event: EventEntity!
     var owner: PersonEntity!
-    var eventMembers: [PersonEntity]
+//    var eventMembers: [PersonEntity]
     
     @Binding var expenseMembers: [PersonEntity]
     @State var membersToChoose = [PersonEntity]()
@@ -39,11 +39,11 @@ struct AddPersonToExpenseView: View {
     }
     
     func membersWithoutOwner() {
-        for member in eventMembers{
-            if member.wrappedID == owner.wrappedID {
+        for member in event.eventMembersArray {
+            if member.wrappedEventMember.wrappedID == owner.wrappedID {
                 continue
             } else {
-                membersToChoose.append(member)
+                membersToChoose.append(member.wrappedEventMember)
             }
         }
     }

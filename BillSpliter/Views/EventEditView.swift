@@ -8,19 +8,8 @@
 import SwiftUI
 
 struct EventEditView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest<EventEntity>(sortDescriptors: []) var fetchedEvents
     
     @State private var showingAddExpense = false
-    
-    var expensesForEventEmpty: Bool {
-        for fetchedEvent in fetchedEvents{
-            if fetchedEvent.id == event.id {
-               return fetchedEvent.expenseArray.isEmpty
-            }
-        }
-        return true
-    }
     
     var event: EventEntity
     
@@ -29,49 +18,50 @@ struct EventEditView: View {
         
         Form {
             
-            if expensesForEventEmpty {
+            if event.expenseArray.isEmpty {
                 Text("Looks like you don't have any expenses for this event add some!")
             } else {
                 
                 Section {
-                    ForEach(fetchedEvents) {fetchedEvent in
-                        if fetchedEvent.id == event.id {
-                            ForEach(fetchedEvent.expenseArray) { expense in
-                                VStack(alignment: .leading) {
-                                    Text(expense.wrappedName)
-                                        .font(.headline)
-                                    Text(expense.owner?.name ?? "Unknown name")
-                                        .font(.callout)
-                                    Text(String(expense.amount))
-                                        .font(.callout)
-                                    // Show who owns whom
-                                    ForEach(Array(expense.wrappedExpenseMembers.keys), id:\.self) { key in
-                                        Text("\(key.wrappedName) - \(expense.wrappedExpenseMembers[key]!)")
+                    ForEach(event.expenseArray) { expense in
+                        VStack(alignment: .leading) {
+                            Text(expense.wrappedName)
+                                .font(.headline)
+                            Text(expense.wrappedOwner.wrappedName)
+                                .font(.callout)
+                            Text(String(expense.amount))
+                                .font(.callout)
+                            List {
+                                ForEach(expense.expenseMembersArray) {member in
+                                    VStack {
+                                        Text(member.wrappedExpenseMember.wrappedName)
+                                        Text(String(member.expenseAmount))
                                     }
                                 }
                             }
                         }
                     }
-                } header: {
-                    Text("Your expenses for event \(event.name ?? "Unknown name")")
+                    
+                    } header: {
+                        Text("Your expenses for event \(event.name ?? "Unknown name")")
+                    }
+                    
                 }
                 
+                
+                Button("Add expense") {
+                    showingAddExpense = true
+                }
             }
+                .navigationTitle("Expenses")
+                .sheet(isPresented: $showingAddExpense) {
+                    AddExpenseView(event: event)
+                }
             
             
-            Button("Add expense") {
-                showingAddExpense = true
-            }
         }
-        .navigationTitle("Expenses")
-        .sheet(isPresented: $showingAddExpense) {
-            AddExpenseView(event: event)
-        }
-        
         
     }
     
-}
-
-
-
+    
+    

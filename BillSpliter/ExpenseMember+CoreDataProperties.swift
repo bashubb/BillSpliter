@@ -24,4 +24,11 @@ extension ExpenseMember {
 
 extension ExpenseMember : Identifiable {
 
+    public var wrappedExpenseMember: PersonEntity {
+        expenseMember ?? PersonEntity()
+    }
+    
+    public var wrappedExpense: ExpenseEntity {
+        expense ?? ExpenseEntity()
+    }
 }
